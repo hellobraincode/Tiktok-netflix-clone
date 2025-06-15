@@ -306,91 +306,88 @@ body {
   justify-content: center;
 }
 
-.movie-card:hover {
-  transform: scale(1.08);
-  z-index: 10;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-}
-
-/* Improved Image Loading */
-.movie-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
-}
-
-/* Image Loading and Error Handling */
-.movie-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: all 0.3s ease;
-  background-color: #2a2a2a;
-  background-image: linear-gradient(45deg, #2a2a2a 25%, transparent 25%),
-                    linear-gradient(-45deg, #2a2a2a 25%, transparent 25%),
-                    linear-gradient(45deg, transparent 75%, #2a2a2a 75%),
-                    linear-gradient(-45deg, transparent 75%, #2a2a2a 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-}
-
-.movie-card img:not([src]) {
-  background-color: #333;
-  position: relative;
-}
-
-.movie-card img:not([src])::before {
-  content: "🎬";
+/* My List Button Styles */
+.add-to-list-btn {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
-  color: #666;
-}
-
-.movie-card img[src=""], .movie-card img:not([src]) {
-  background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  background: rgba(42, 42, 42, 0.8);
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.movie-card img[src=""]:after, .movie-card img:not([src]):after {
-  content: "🎬";
-  font-size: 2rem;
-  color: #666;
-}
-
-.movie-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,0.8));
-  padding: 20px 15px 15px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.movie-card:hover .add-to-list-btn {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.add-to-list-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.add-to-list-btn.added {
+  background: #46d369;
+  border-color: #46d369;
+}
+
+.add-to-list-btn.added:after {
+  content: '✓';
+  font-size: 14px;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  z-index: 2;
 }
 
 .movie-card:hover .movie-info {
   opacity: 1;
+  transform: translateY(0);
 }
 
-.movie-info h3 {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 4px;
+.movie-info {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+/* Video Mute Button */
+.video-mute-btn {
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
+  width: 40px;
+  height: 40px;
+  background: rgba(42, 42, 42, 0.8);
+  border: 1px solid #ffffff;
+  border-radius: 50%;
   color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 3;
 }
 
-.movie-info p {
-  font-size: 12px;
-  color: #46d369;
-  font-weight: 500;
+.video-mute-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
 }
 
 /* Enhanced Movie Title Fallback */
@@ -692,36 +689,30 @@ body {
 
 /* Custom Image Placeholder */
 .image-placeholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #2a2a2a 0%, #404040 100%);
+  width: 250px;
+  height: 140px;
+  background: linear-gradient(135deg, #333333, #555555);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  position: absolute;
-  top: 0;
-  left: 0;
+  color: #ffffff;
 }
 
 .placeholder-content {
   text-align: center;
-  color: #888;
 }
 
 .placeholder-icon {
-  font-size: 2rem;
+  font-size: 24px;
   display: block;
   margin-bottom: 8px;
-  opacity: 0.6;
 }
 
 .placeholder-text {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
   opacity: 0.8;
-  max-width: 200px;
-  word-wrap: break-word;
 }
 
 /* Movie Placeholder Styling */
@@ -764,25 +755,294 @@ body {
 /* Video mute button */
 .video-mute-btn {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 3;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
+  bottom: 60px;
+  right: 60px;
   width: 40px;
   height: 40px;
-  color: white;
+  background: rgba(42, 42, 42, 0.8);
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  color: #ffffff;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 3;
 }
 
 .video-mute-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.2);
   transform: scale(1.1);
+}
+
+/* Authentication Styles */
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.auth-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.auth-container {
+  background: #141414;
+  border-radius: 8px;
+  padding: 60px 68px;
+  width: 450px;
+  max-width: 90vw;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.auth-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.auth-header h1 {
+  color: #e50914;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.close-auth {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.close-auth:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.auth-form h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: #ffffff;
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group input {
+  width: 100%;
+  height: 50px;
+  background: #333333;
+  border: none;
+  border-radius: 4px;
+  padding: 16px;
+  color: #ffffff;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  background: #454545;
+}
+
+.input-group input::placeholder {
+  color: #8c8c8c;
+}
+
+.auth-btn {
+  width: 100%;
+  height: 48px;
+  background: #e50914;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 24px;
+  transition: background-color 0.2s ease;
+}
+
+.auth-btn:hover {
+  background: #f40612;
+}
+
+.auth-btn:disabled {
+  background: #666666;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.auth-switch p {
+  color: #737373;
+  font-size: 16px;
+}
+
+.auth-switch span {
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.auth-switch span:hover {
+  color: #e50914;
+}
+
+.auth-options {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #333333;
+}
+
+.google-btn {
+  width: 100%;
+  height: 48px;
+  background: #ffffff;
+  border: none;
+  border-radius: 4px;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: background-color 0.2s ease;
+}
+
+.google-btn:hover {
+  background: #f5f5f5;
+}
+
+/* Navigation Auth Styles */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.login-btn {
+  background: #e50914;
+  border: none;
+  color: #ffffff;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-btn:hover {
+  background: #f40612;
+}
+
+.profile {
+  position: relative;
+}
+
+.profile-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.profile-pic:hover {
+  opacity: 0.8;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #141414;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  padding: 16px;
+  width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.profile:hover .profile-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #333333;
+}
+
+.profile-info span:first-child {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.profile-info span:last-child {
+  color: #737373;
+  font-size: 12px;
+}
+
+.logout-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #333333;
+  color: #ffffff;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #333333;
+}
+
+.hidden {
+  display: none !important;
 }

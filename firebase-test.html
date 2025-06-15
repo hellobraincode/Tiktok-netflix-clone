@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Test - Netflix Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #141414;
+            color: white;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #e50914;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #f40612;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+            border-radius: 4px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            background: #333;
+        }
+        .success { background: #16a34a; }
+        .error { background: #dc2626; }
+    </style>
+</head>
+<body>
+    <h1>🔥 Firebase Authentication Test</h1>
+    
+    <div class="test-section">
+        <h2>Configuration Status</h2>
+        <div id="config-status" class="status">Checking Firebase configuration...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Authentication Test</h2>
+        <div>
+            <h3>Email/Password Sign Up</h3>
+            <input type="text" id="test-name" placeholder="Full Name" value="Test User">
+            <input type="email" id="test-email" placeholder="Email" value="test@example.com">
+            <input type="password" id="test-password" placeholder="Password" value="test123">
+            <button onclick="testSignUp()">Test Sign Up</button>
+        </div>
+        
+        <div>
+            <h3>Email/Password Sign In</h3>
+            <input type="email" id="login-email" placeholder="Email" value="test@example.com">
+            <input type="password" id="login-password" placeholder="Password" value="test123">
+            <button onclick="testSignIn()">Test Sign In</button>
+        </div>
+        
+        <div>
+            <h3>Google Sign In</h3>
+            <button onclick="testGoogleSignIn()">Test Google Sign In</button>
+        </div>
+        
+        <div>
+            <h3>Sign Out</h3>
+            <button onclick="testSignOut()">Sign Out</button>
+        </div>
+        
+        <div id="auth-status" class="status">Not authenticated</div>
+    </div>
+
+    <div class="test-section">
+        <h2>User Information</h2>
+        <div id="user-info" class="status">No user signed in</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Firestore Test</h2>
+        <button onclick="testFirestore()">Test Firestore Write</button>
+        <div id="firestore-status" class="status">Firestore not tested</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Instructions</h2>
+        <ol>
+            <li>Make sure you've set up your Firebase project</li>
+            <li>Replace the Firebase config in index.html with your actual config</li>
+            <li>Enable Email/Password and Google authentication in Firebase Console</li>
+            <li>Create a Firestore database in test mode</li>
+            <li>Try the authentication tests above</li>
+        </ol>
+        <p><strong>Note:</strong> This is a test page. Go back to <a href="index.html" style="color: #e50914;">index.html</a> to see the full Netflix clone.</p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { 
+            getAuth, 
+            onAuthStateChanged,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut,
+            GoogleAuthProvider,
+            signInWithPopup
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { 
+            getFirestore,
+            doc,
+            setDoc
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "your-api-key-here",
+            authDomain: "your-project.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "your-app-id"
+        };
+
+        let app, auth, db;
+
+        try {
+            // Initialize Firebase
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            
+            document.getElementById('config-status').textContent = '✅ Firebase initialized successfully';
+            document.getElementById('config-status').className = 'status success';
+            
+            // Listen for auth state changes
+            onAuthStateChanged(auth, (user) => {
+                updateAuthStatus(user);
+            });
+            
+        } catch (error) {
+            document.getElementById('config-status').textContent = '❌ Firebase initialization failed: ' + error.message;
+            document.getElementById('config-status').className = 'status error';
+        }
+
+        function updateAuthStatus(user) {
+            const authStatus = document.getElementById('auth-status');
+            const userInfo = document.getElementById('user-info');
+            
+            if (user) {
+                authStatus.textContent = '✅ User is signed in';
+                authStatus.className = 'status success';
+                
+                userInfo.innerHTML = `
+                    <strong>User Details:</strong><br>
+                    Name: ${user.displayName || 'Not set'}<br>
+                    Email: ${user.email}<br>
+                    UID: ${user.uid}<br>
+                    Email Verified: ${user.emailVerified}
+                `;
+                userInfo.className = 'status success';
+            } else {
+                authStatus.textContent = '❌ No user signed in';
+                authStatus.className = 'status';
+                
+                userInfo.textContent = 'No user signed in';
+                userInfo.className = 'status';
+            }
+        }
+
+        // Make functions available globally for onclick handlers
+        window.testSignUp = async () => {
+            const name = document.getElementById('test-name').value;
+            const email = document.getElementById('test-email').value;
+            const password = document.getElementById('test-password').value;
+            
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                console.log('Sign up successful:', userCredential.user);
+                alert('✅ Sign up successful!');
+            } catch (error) {
+                console.error('Sign up error:', error);
+                alert('❌ Sign up failed: ' + error.message);
+            }
+        };
+
+        window.testSignIn = async () => {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                console.log('Sign in successful:', userCredential.user);
+                alert('✅ Sign in successful!');
+            } catch (error) {
+                console.error('Sign in error:', error);
+                alert('❌ Sign in failed: ' + error.message);
+            }
+        };
+
+        window.testGoogleSignIn = async () => {
+            const provider = new GoogleAuthProvider();
+            
+            try {
+                const result = await signInWithPopup(auth, provider);
+                console.log('Google sign in successful:', result.user);
+                alert('✅ Google sign in successful!');
+            } catch (error) {
+                console.error('Google sign in error:', error);
+                alert('❌ Google sign in failed: ' + error.message);
+            }
+        };
+
+        window.testSignOut = async () => {
+            try {
+                await signOut(auth);
+                console.log('Sign out successful');
+                alert('✅ Sign out successful!');
+            } catch (error) {
+                console.error('Sign out error:', error);
+                alert('❌ Sign out failed: ' + error.message);
+            }
+        };
+
+        window.testFirestore = async () => {
+            const firestoreStatus = document.getElementById('firestore-status');
+            
+            if (!auth.currentUser) {
+                alert('Please sign in first to test Firestore');
+                return;
+            }
+            
+            try {
+                await setDoc(doc(db, 'test', 'testDoc'), {
+                    message: 'Hello Firestore!',
+                    timestamp: new Date(),
+                    userId: auth.currentUser.uid
+                });
+                
+                firestoreStatus.textContent = '✅ Firestore write successful';
+                firestoreStatus.className = 'status success';
+                alert('✅ Firestore test successful!');
+            } catch (error) {
+                firestoreStatus.textContent = '❌ Firestore write failed: ' + error.message;
+                firestoreStatus.className = 'status error';
+                alert('❌ Firestore test failed: ' + error.message);
+            }
+        };
+    </script>
+</body>
+</html>
