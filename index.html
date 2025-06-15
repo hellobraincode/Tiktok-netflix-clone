@@ -3,43 +3,198 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Netflix Clone</title>
+  <title>Netflix</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="header">
     <nav class="navbar">
-      <ul class="nav-links">
-        <li>Home</li>
-        <li>TV Shows</li>
-        <li>Movies</li>
-        <li>My List</li>
-      </ul>
+      <div class="nav-left">
+        <div class="netflix-logo">NETFLIX</div>
+        <ul class="nav-links">
+          <li class="active">Home</li>
+          <li>TV Shows</li>
+          <li>Movies</li>
+          <li>New & Popular</li>
+          <li>My List</li>
+          <li>Browse by Languages</li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <div class="search-icon">🔍</div>
+        <div class="notifications">🔔</div>
+        <div class="profile">
+          <img src="https://i.pravatar.cc/32" alt="Profile" class="profile-pic">
+        </div>
+      </div>
     </nav>
-  </header>
-
-  <section class="hero">
-    <h1>Unlimited movies, TV shows, and more.</h1>
-    <h2>Watch anywhere. Cancel anytime.</h2>
-    <form class="cta-form">
-      <button type="submit">Get Started</button>
-    </form>
+  </header>  <section class="hero">
+    <div class="hero-background">
+      <video autoplay muted loop playsinline class="hero-video" oncanplay="this.style.opacity='1'">
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+        <source src="https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4" type="video/mp4">
+        <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4" type="video/mp4">
+      </video>
+      <div class="hero-bg-fallback">
+        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&w=1920&h=1080&fit=crop&crop=center" alt="Stranger Things Background" class="hero-bg-image" />
+      </div>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title">Stranger Things</h1>
+      <p class="hero-description">When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.</p>
+      <div class="hero-buttons">
+        <button class="play-btn">▶ Play</button>
+        <button class="info-btn">ⓘ More Info</button>
+      </div>
+    </div>
+    <div class="hero-fade"></div>
   </section>
-
-  <main class="main-content">
-    <section class="trending">
-      <h2>Trending Now</h2>
+  <main class="main-content">    <section class="movie-section">
+      <h2 class="section-title">Trending Now</h2>
       <div class="movie-row">
-        <img src="https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg" alt="Movie 1" />
-        <img src="https://m.media-amazon.com/images/I/91KkWf50SoL._AC_SY679_.jpg" alt="Movie 2" />
-        <img src="https://m.media-amazon.com/images/I/71niXI3lxlL._AC_SY679_.jpg" alt="Movie 3" />
-
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1489599511986-c4a9d60915ab?w=250&h=140&fit=crop&crop=center" alt="Stranger Things" onerror="this.style.background='linear-gradient(135deg, #e50914, #ff6b6b)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>🎬<br>Stranger Things</div>'" />
+          <div class="movie-info">
+            <h3>Stranger Things</h3>
+            <p>97% Match • 2016 • 4 Seasons</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=250&h=140&fit=crop&crop=center" alt="The Witcher" onerror="this.style.background='linear-gradient(135deg, #8b5cf6, #a855f7)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>⚔️<br>The Witcher</div>'" />
+          <div class="movie-info">
+            <h3>The Witcher</h3>
+            <p>94% Match • 2019 • 3 Seasons</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=250&h=140&fit=crop&crop=center" alt="Wednesday" onerror="this.style.background='linear-gradient(135deg, #06b6d4, #0891b2)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>🖤<br>Wednesday</div>'" />
+          <div class="movie-info">
+            <h3>Wednesday</h3>
+            <p>91% Match • 2022 • 1 Season</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=250&h=140&fit=crop&crop=center" alt="Ozark" onerror="this.style.background='linear-gradient(135deg, #10b981, #059669)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>💰<br>Ozark</div>'" />
+          <div class="movie-info">
+            <h3>Ozark</h3>
+            <p>96% Match • 2017 • 4 Seasons</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=250&h=140&fit=crop&crop=center" alt="Money Heist" onerror="this.style.background='linear-gradient(135deg, #f59e0b, #d97706)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>🎭<br>Money Heist</div>'" />
+          <div class="movie-info">
+            <h3>Money Heist</h3>
+            <p>89% Match • 2017 • 5 Seasons</p>
+          </div>
+        </div>
+      </div>
+    </section>    <section class="movie-section">
+      <h2 class="section-title">Netflix Originals</h2>
+      <div class="movie-row">
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=250&h=140&fit=crop&crop=center" alt="Dark" onerror="this.style.background='linear-gradient(135deg, #1f2937, #374151)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>⚫<br>Dark</div>'" />
+          <div class="movie-info">
+            <h3>Dark</h3>
+            <p>93% Match • 2017 • 3 Seasons</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=250&h=140&fit=crop&crop=center" alt="House of Cards" onerror="this.style.background='linear-gradient(135deg, #7c3aed, #5b21b6)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>🏛️<br>House of Cards</div>'" />
+          <div class="movie-info">
+            <h3>House of Cards</h3>
+            <p>88% Match • 2013 • 6 Seasons</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1582905704827-52c2f3a95f6e?w=250&h=140&fit=crop&crop=center" alt="The Crown" onerror="this.style.background='linear-gradient(135deg, #dc2626, #991b1b)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>👑<br>The Crown</div>'" />
+          <div class="movie-info">
+            <h3>The Crown</h3>
+            <p>92% Match • 2016 • 6 Seasons</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=250&h=140&fit=crop&crop=center" alt="Squid Game" onerror="this.style.background='linear-gradient(135deg, #059669, #047857)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>🦑<br>Squid Game</div>'" />
+          <div class="movie-info">
+            <h3>Squid Game</h3>
+            <p>95% Match • 2021 • 1 Season</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=250&h=140&fit=crop&crop=center" alt="Orange is the New Black" onerror="this.style.background='linear-gradient(135deg, #ea580c, #c2410c)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>🍊<br>OITNB</div>'" />
+          <div class="movie-info">
+            <h3>Orange is the New Black</h3>
+            <p>87% Match • 2013 • 7 Seasons</p>
+          </div>
+        </div>
+      </div>
+    </section>    <section class="movie-section">
+      <h2 class="section-title">Popular on Netflix</h2>
+      <div class="movie-row">
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=250&h=140&fit=crop&crop=center" alt="Lucifer" onerror="this.style.background='linear-gradient(135deg, #be123c, #9f1239)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>😈<br>Lucifer</div>'" />
+          <div class="movie-info">
+            <h3>Lucifer</h3>
+            <p>90% Match • 2016 • 6 Seasons</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1522159698986-59a39b82ea45?w=250&h=140&fit=crop&crop=center" alt="The Middle" onerror="this.style.background='linear-gradient(135deg, #0369a1, #075985)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>👨‍👩‍👧‍👦<br>The Middle</div>'" />
+          <div class="movie-info">
+            <h3>The Middle</h3>
+            <p>85% Match • 2009 • 9 Seasons</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1509281373149-e957c6296406?w=250&h=140&fit=crop&crop=center" alt="Breaking Bad" onerror="this.style.background='linear-gradient(135deg, #16a34a, #15803d)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>⚗️<br>Breaking Bad</div>'" />
+          <div class="movie-info">
+            <h3>Breaking Bad</h3>
+            <p>98% Match • 2008 • 5 Seasons</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=250&h=140&fit=crop&crop=center" alt="Friends" onerror="this.style.background='linear-gradient(135deg, #ca8a04, #a16207)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>☕<br>Friends</div>'" />
+          <div class="movie-info">
+            <h3>Friends</h3>
+            <p>92% Match • 1994 • 10 Seasons</p>
+          </div>
+        </div>
+        <div class="movie-card">
+          <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=250&h=140&fit=crop&crop=center" alt="The Office" onerror="this.style.background='linear-gradient(135deg, #4338ca, #3730a3)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<div style=color:white;text-align:center;font-size:16px;font-weight:600>🏢<br>The Office</div>'" />
+          <div class="movie-info">
+            <h3>The Office</h3>
+            <p>89% Match • 2005 • 9 Seasons</p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
-
   <footer class="footer">
-    <p>&copy; 2025 Netflix Clone. Made by HelloBrainCode</p>
+    <div class="footer-content">
+      <div class="footer-links">
+        <div class="footer-column">
+          <a href="#">Audio Description</a>
+          <a href="#">Help Centre</a>
+          <a href="#">Gift Cards</a>
+          <a href="#">Media Centre</a>
+        </div>
+        <div class="footer-column">
+          <a href="#">Investor Relations</a>
+          <a href="#">Jobs</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Privacy</a>
+        </div>
+        <div class="footer-column">
+          <a href="#">Legal Notices</a>
+          <a href="#">Cookie Preferences</a>
+          <a href="#">Corporate Information</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+      <p class="footer-copyright">&copy; 1997-2025 Netflix, Inc.</p>    </div>
   </footer>
+  <script src="script.js"></script>
 </body>
 </html>
